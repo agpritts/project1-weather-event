@@ -33,6 +33,7 @@ var displayEvents = function() {
         eventItemEl = document.createElement("li");
         eventLinkEl = document.createElement("a");
         eventLinkEl.setAttribute("href", eventObj[index].eventUrl);
+        eventLinkEl.setAttribute("target", "_blank");
         eventTimeEl = document.createElement("p");
         eventTimeEl.className = "event-time";
         eventTimeEl.textContent = eventObj[index].startTime;
