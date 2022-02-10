@@ -15,6 +15,7 @@ var getEvents = function() {
     console.log(todayDate);
     console.log(endDate);
    fetch(apiUrl).then(function(response) {
+       console.log(response);
         if (response.ok) { 
             response.json().then(function(data) { 
                 console.log(data);
@@ -24,13 +25,18 @@ var getEvents = function() {
             })
         }
    })
+   .catch(function(error) {
+        console.log(response);
+       alert("Error connecting to Ticketmaster.");
+   });
 };
 
 var displayEvents = function() {
     for (let index = 0; index < eventObj.length; index++) {
-        // Create the elements for the event list items
+    // Create the elements for the event list items
         eventContainerEl = document.querySelector(".events");
         eventItemEl = document.createElement("li");
+        // Anchor tag to link to the TM site for ticket purchase
         eventLinkEl = document.createElement("a");
         eventLinkEl.setAttribute("href", eventObj[index].eventUrl);
         eventLinkEl.setAttribute("target", "_blank");
@@ -48,7 +54,10 @@ var displayEvents = function() {
         eventItemEl.appendChild(eventNameEl);
         eventItemEl.appendChild(eventVenueEl);
         eventLinkEl.appendChild(eventItemEl);
+        // Attach them to the unordered list
         eventContainerEl.appendChild(eventLinkEl);
+        // call function to sort the list items into the appropriate day
+        // postEvents();
     };
     console.log(eventContainerEl);
 
