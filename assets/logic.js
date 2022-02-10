@@ -33,13 +33,20 @@ var getEvents = function() {
 
 var displayEvents = function() {
     for (let index = 0; index < eventObj.length; index++) {
-    // Create the elements for the event list items
-        eventContainerEl = document.querySelector(".events");
+        // Extract the date from the event date string from TM
+        targetDate = new Date (eventObj[index].eventDate);
+        targetSelector = targetDate.getDate();
+        console.log(targetSelector);
+        // Find (and select) list corresponding to the date of the event
+        var eventContainerEl = document.querySelector("[data-target='" + targetSelector + "']");
+        // Create the elements for the event list items
+        console.log(eventContainerEl);
         eventItemEl = document.createElement("li");
         // Anchor tag to link to the TM site for ticket purchase
         eventLinkEl = document.createElement("a");
         eventLinkEl.setAttribute("href", eventObj[index].eventUrl);
         eventLinkEl.setAttribute("target", "_blank");
+        // Create event information elements
         eventTimeEl = document.createElement("p");
         eventTimeEl.className = "event-time";
         eventTimeEl.textContent = eventObj[index].startTime;
@@ -49,22 +56,21 @@ var displayEvents = function() {
         eventVenueEl = document.createElement("p")
         eventVenueEl.className = "event-venue"
         eventVenueEl.textContent = eventObj[index].venue;
-        // Build the individual list items
+        // Build the individual list item
         eventItemEl.appendChild(eventTimeEl);
         eventItemEl.appendChild(eventNameEl);
         eventItemEl.appendChild(eventVenueEl);
         eventLinkEl.appendChild(eventItemEl);
-        // Attach them to the unordered list
+        // Attach them to the proper unordered list
         eventContainerEl.appendChild(eventLinkEl);
-        // call function to sort the list items into the appropriate day
-        // postEvents();
     };
-    console.log(eventContainerEl);
 
 }
 
 var buildDataStructure = function(data) {
     for (var index = 0; index < data._embedded.events.length; index++) {
+        // var eventDateStr = new Date(data._embedded.events[index].dates.start.dateTime);
+        // console.log(eventDateStr.getDate());
         eventObj[index] = {
         name: data._embedded.events[index].name,
         eventDate: data._embedded.events[index].dates.start.dateTime,
@@ -73,6 +79,7 @@ var buildDataStructure = function(data) {
         venueId: data._embedded.events[index]._embedded.venues[0].id,
         eventUrl: data._embedded.events[index].url
         };
+        // console.log(eventObj[index].eventDate.getDate());
     }
 };
 getEvents();
