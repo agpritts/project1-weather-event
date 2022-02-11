@@ -22,8 +22,6 @@ var displayTime = function() {
     $("#day4").html(time);
     var time = moment().day(8).format('dddd </br> MM/DD');
     $("#day5").html(time);
-    var time = moment().day(9).format('dddd </br> MM/DD');
-    $("#day6").html(time);
 };
 
 $(document).ready(function() {
@@ -114,19 +112,6 @@ function secondAPI() {
         var iconn = document.createElement('img');
         iconn.src = 'http://openweathermap.org/img/wn/' + data.daily[4].weather[0].icon + '@2x.png';
         container5.appendChild(iconn);
-    
-        var tempD = document.createElement('p');
-        tempD.textContent = 'Day: ' + data.daily[5].temp.day + '°F';
-        container6.appendChild(tempD);
-        var tempN = document.createElement('p');
-        tempN.textContent = 'Night: ' + data.daily[5].temp.eve + '°F';
-        container6.appendChild(tempN);
-        var foreC = document.createElement('p');
-        foreC.textContent = 'Forecast: ' + data.daily[5].weather[0].main;
-        container6.appendChild(foreC);
-        var iconn = document.createElement('img');
-        iconn.src = 'http://openweathermap.org/img/wn/' + data.daily[5].weather[0].icon + '@2x.png';
-        container6.appendChild(iconn);
     })
 }
 
