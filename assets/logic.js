@@ -23,6 +23,35 @@ var displayTime = function() {
     $("#day5").html(time);
 };
 
+// endDate.setDate(todayDate.getDate()+5);
+// endDate.setSeconds(0,0);
+// endDate = endDate.toISOString();
+// endDate = endDate.replace(".000Z","Z");
+// var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDate;
+// var getEvents = function() {
+//     console.log(todayDate);
+//     console.log(endDate);
+//    fetch(apiUrl).then(function(response) {
+//     //    console.log(response);
+//         if (response.ok) {
+//             response.json().then(function(data) { 
+//                 console.log(data);
+//                 buildDataStructure(data);
+//                 displayEvents();
+//                 // console.log(eventObj);
+//             })
+//             // .catch(function(error) {
+//             //      console.log(error);
+//             //     alert("Error connecting to Ticketmaster.");
+//             // });
+//         }
+//    })
+//    .catch(function(error) {
+//     console.log(error);
+//    alert("Error connecting to Ticketmaster.");
+// });
+// };
+
 $(document).ready(function() {
     displayTime();
 });
@@ -36,7 +65,7 @@ fetch('https://api.openweathermap.org/data/2.5/weather?zip=27612&appid=cdf224724
     userLat = data.coord.lat;
     userLong = data.coord.lon;
     secondAPI();
-    tmAPI();
+    getEvents();
     }
 );
 
@@ -112,48 +141,45 @@ function secondAPI() {
         iconn.src = 'http://openweathermap.org/img/wn/' + data.daily[4].weather[0].icon + '@2x.png';
         container5.appendChild(iconn);
     })
-}
-
-function tmAPI() {
+};
+// Create and convert date to provide to TM for most recent 5-day search
     endDate.setDate(todayDate.getDate()+5);
     endDate.setSeconds(0,0);
     endDate = endDate.toISOString();
     endDate = endDate.replace(".000Z","Z");
-    var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDate;
+    
     var getEvents = function() {
+        var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDate;
         console.log(todayDate);
         console.log(endDate);
        fetch(apiUrl).then(function(response) {
-           console.log(response);
             if (response.ok) { 
                 response.json().then(function(data) { 
-                    console.log(data);
                     buildDataStructure(data);
                     displayEvents();
-                    // console.log(eventObj);
                 })
-                // .catch(function(error) {
-                //      console.log(error);
-                //     alert("Error connecting to Ticketmaster.");
-                // });
-            }
        })
        .catch(function(error) {
         console.log(error);
        alert("Error connecting to Ticketmaster.");
-    });
+        });
     };
     
     var displayEvents = function() {
+        var todayDayNumber = todayDate.getDate();
+        for (let daysOut = 1; daysOut < 6; daysOut++) {
+           var defineTargets = document.querySelector("#event-list-" + daysOut);
+           defineTargets.dataset.target = todayDayNumber;
+           todayDayNumber++;
+           console.log(defineTargets);
+        };
         for (let index = 0; index < eventObj.length; index++) {
             // Extract the date from the event date string from TM
-            targetDate = new Date (eventObj[index].eventDate);
-            targetSelector = targetDate.getDate();
-            console.log(targetSelector);
+            eventDate = new Date (eventObj[index].eventDate);
+            targetSelector = eventDate.getDate();
             // Find (and select) list corresponding to the date of the event
             var eventContainerEl = document.querySelector("[data-target='" + targetSelector + "']");
             // Create the elements for the event list items
-            console.log(eventContainerEl);
             eventItemEl = document.createElement("li");
             // Anchor tag to link to the TM site for ticket purchase
             eventLinkEl = document.createElement("a");
@@ -162,7 +188,10 @@ function tmAPI() {
             // Create event information elements
             eventTimeEl = document.createElement("p");
             eventTimeEl.className = "event-time";
-            eventTimeEl.textContent = eventObj[index].startTime;
+            // var formattedTime = new Date(eventObj[index].dateTime);
+            formattedTime = moment(eventDate).format("h:mm a");
+            console.log(formattedTime);
+            eventTimeEl.innerHTML = formattedTime;
             eventNameEl = document.createElement("p")
             eventNameEl.className = "event-name"
             eventNameEl.textContent = eventObj[index].name;
@@ -178,12 +207,10 @@ function tmAPI() {
             eventContainerEl.appendChild(eventLinkEl);
         };
     
-    }
+    };
     
     var buildDataStructure = function(data) {
         for (var index = 0; index < data._embedded.events.length; index++) {
-            // var eventDateStr = new Date(data._embedded.events[index].dates.start.dateTime);
-            // console.log(eventDateStr.getDate());
             eventObj[index] = {
             name: data._embedded.events[index].name,
             eventDate: data._embedded.events[index].dates.start.dateTime,
@@ -192,8 +219,5 @@ function tmAPI() {
             venueId: data._embedded.events[index]._embedded.venues[0].id,
             eventUrl: data._embedded.events[index].url
             };
-            // console.log(eventObj[index].eventDate.getDate());
         }
     };
-    getEvents();
-}
