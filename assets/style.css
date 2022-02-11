@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+* {
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style-type: none;
+}
+=======
 a {
     text-decoration: none;
     color: black;
@@ -16,3 +25,4 @@ li {
     background-color: lightgray;
     padding: 5px 5px;
 }
+>>>>>>> b75402abbddcf196bfb4117792f134ec25360314
