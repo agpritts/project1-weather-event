@@ -9,7 +9,6 @@ var container2 = document.getElementById('place2');
 var container3 = document.getElementById('place3');
 var container4 = document.getElementById('place4');
 var container5 = document.getElementById('place5');
-var container6 = document.getElementById('place6');
 
 var displayTime = function() {
     var time = moment().format('dddd </br> MM/DD');
