@@ -21,14 +21,18 @@ var getEvents = function() {
                 console.log(data);
                 buildDataStructure(data);
                 displayEvents();
-                console.log(eventObj);
+                // console.log(eventObj);
             })
+            .catch(function(error) {
+                 console.log(error);
+                alert("Error connecting to Ticketmaster.");
+            });
         }
    })
    .catch(function(error) {
-        console.log(response);
-       alert("Error connecting to Ticketmaster.");
-   });
+    console.log(error);
+   alert("Error connecting to Ticketmaster.");
+});
 };
 
 var displayEvents = function() {
