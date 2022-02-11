@@ -21,6 +21,33 @@ var displayTime = function() {
     $("#day4").html(time);
     var time = moment().day(8).format('dddd </br> MM/DD');
     $("#day5").html(time);
+endDate.setDate(todayDate.getDate()+5);
+endDate.setSeconds(0,0);
+endDate = endDate.toISOString();
+endDate = endDate.replace(".000Z","Z");
+var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDate;
+var getEvents = function() {
+    console.log(todayDate);
+    console.log(endDate);
+   fetch(apiUrl).then(function(response) {
+    //    console.log(response);
+        if (response.ok) {
+            response.json().then(function(data) { 
+                console.log(data);
+                buildDataStructure(data);
+                displayEvents();
+                // console.log(eventObj);
+            })
+            // .catch(function(error) {
+            //      console.log(error);
+            //     alert("Error connecting to Ticketmaster.");
+            // });
+        }
+   })
+   .catch(function(error) {
+    console.log(error);
+   alert("Error connecting to Ticketmaster.");
+});
 };
 
 $(document).ready(function() {
