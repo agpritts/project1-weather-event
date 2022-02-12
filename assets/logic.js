@@ -3,6 +3,7 @@ var userLong = "";
 var userRadius = 75;
 var todayDate = new Date();
 var endDate = new Date();
+endDate.setDate(todayDate.getDate()+4);
 var eventObj = [{}];
 var container1 = document.getElementById('place1');
 var container2 = document.getElementById('place2');
@@ -39,11 +40,6 @@ var displayTime = function() {
 //                 buildDataStructure(data);
 //                 displayEvents();
 //                 // console.log(eventObj);
-//             })
-//             // .catch(function(error) {
-//             //      console.log(error);
-//             //     alert("Error connecting to Ticketmaster.");
-//             // });
 //         }
 //    })
 //    .catch(function(error) {
@@ -142,36 +138,36 @@ function secondAPI() {
         container5.appendChild(iconn);
     })
 };
-// Create and convert date to provide to TM for most recent 5-day search
-    endDate.setDate(todayDate.getDate()+5);
-    endDate.setSeconds(0,0);
-    endDate = endDate.toISOString();
-    endDate = endDate.replace(".000Z","Z");
-    
-    var getEvents = function() {
-        var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDate;
-        console.log(todayDate);
-        console.log(endDate);
+
+var getEvents = function() {
+    // Create and convert date to provide to TM for most recent 5-day search
+        // Set up Date Ranges and convert to ISO format
+        endDate.setSeconds(0,0);
+        var endDateISO = endDate.toISOString();
+        endDateISO = endDateISO.replace(".000Z","Z");
+        var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&size=50&sort=date,asc&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDateISO;
         fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             buildDataStructure(data);
             displayEvents();
         })
-       .catch(function(error) {
+       .catch((error) => {
         console.log(error);
        alert("Error connecting to Ticketmaster.");
         });
     };
     
     var displayEvents = function() {
+        // Name the ul targets to help matching events to the proper display date
         var todayDayNumber = todayDate.getDate();
         for (let daysOut = 1; daysOut < 6; daysOut++) {
            var defineTargets = document.querySelector("#event-list-" + daysOut);
            defineTargets.dataset.target = todayDayNumber;
            todayDayNumber++;
-           console.log(defineTargets);
         };
+        console.log(eventObj);
         for (let index = 0; index < eventObj.length; index++) {
             // Extract the date from the event date string from TM
             eventDate = new Date (eventObj[index].eventDate);
@@ -187,9 +183,7 @@ function secondAPI() {
             // Create event information elements
             eventTimeEl = document.createElement("p");
             eventTimeEl.className = "event-time";
-            // var formattedTime = new Date(eventObj[index].dateTime);
             formattedTime = moment(eventDate).format("h:mm a");
-            console.log(formattedTime);
             eventTimeEl.innerHTML = formattedTime;
             eventNameEl = document.createElement("p")
             eventNameEl.className = "event-name"
