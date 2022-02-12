@@ -2,7 +2,6 @@ var userLat = "";
 var userLong = "";
 var userRadius = 75;
 var todayDate = new Date();
-// var offsetGmt = todayDate.timeZoneOffset * 60 * 1000
 var endDate = new Date();
 endDate.setDate(todayDate.getDate()+4);
 var eventObj = [{}];
@@ -41,11 +40,6 @@ var displayTime = function() {
 //                 buildDataStructure(data);
 //                 displayEvents();
 //                 // console.log(eventObj);
-//             })
-//             // .catch(function(error) {
-//             //      console.log(error);
-//             //     alert("Error connecting to Ticketmaster.");
-//             // });
 //         }
 //    })
 //    .catch(function(error) {
@@ -144,27 +138,18 @@ function secondAPI() {
         container5.appendChild(iconn);
     })
 };
-// Create and convert date to provide to TM for most recent 5-day search
 
 var getEvents = function() {
-        // Set up Date Ranges and convert to ISO format fo
-        // console.log(todayDate);
-        // endDate.setDate(todayDate.getDate()+5);
-        // console.log(endDate)
-        // var numberOfMlSeconds = currentDateObj.getTime();
-        // var addMlSeconds = 60 * 60 * 1000;
-        // var newDateObj = new Date(numberOfMlSeconds + addMlSeconds);
+    // Create and convert date to provide to TM for most recent 5-day search
+        // Set up Date Ranges and convert to ISO format
         endDate.setSeconds(0,0);
-        // endDateISO = moment(endDate).toISOString(true)
         var endDateISO = endDate.toISOString();
         endDateISO = endDateISO.replace(".000Z","Z");
-        console.log(endDateISO);
         var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&size=50&sort=date,asc&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDateISO;
-        // console.log(todayDate);
-        // console.log(endDate);
         fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             buildDataStructure(data);
             displayEvents();
         })
@@ -175,20 +160,18 @@ var getEvents = function() {
     };
     
     var displayEvents = function() {
+        // Name the ul targets to help matching events to the proper display date
         var todayDayNumber = todayDate.getDate();
         for (let daysOut = 1; daysOut < 6; daysOut++) {
            var defineTargets = document.querySelector("#event-list-" + daysOut);
            defineTargets.dataset.target = todayDayNumber;
            todayDayNumber++;
-           console.log(defineTargets);
         };
         console.log(eventObj);
         for (let index = 0; index < eventObj.length; index++) {
             // Extract the date from the event date string from TM
             eventDate = new Date (eventObj[index].eventDate);
-            console.log(eventDate);
             targetSelector = eventDate.getDate();
-            console.log(targetSelector);
             // Find (and select) list corresponding to the date of the event
             var eventContainerEl = document.querySelector("[data-target='" + targetSelector + "']");
             // Create the elements for the event list items
@@ -200,9 +183,7 @@ var getEvents = function() {
             // Create event information elements
             eventTimeEl = document.createElement("p");
             eventTimeEl.className = "event-time";
-            // var formattedTime = new Date(eventObj[index].dateTime);
             formattedTime = moment(eventDate).format("h:mm a");
-            // console.log(formattedTime);
             eventTimeEl.innerHTML = formattedTime;
             eventNameEl = document.createElement("p")
             eventNameEl.className = "event-name"
