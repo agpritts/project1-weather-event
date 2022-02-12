@@ -2,7 +2,9 @@ var userLat = "";
 var userLong = "";
 var userRadius = 75;
 var todayDate = new Date();
+var offsetGmt = todayDate.timeZoneOffset * 60 * 1000
 var endDate = new Date();
+endDate.setDate(todayDate.getDate()+5);
 var eventObj = [{}];
 var container1 = document.getElementById('place1');
 var container2 = document.getElementById('place2');
@@ -143,12 +145,20 @@ function secondAPI() {
     })
 };
 // Create and convert date to provide to TM for most recent 5-day search
-    endDate.setDate(todayDate.getDate()+5);
-    endDate.setSeconds(0,0);
-    endDate = endDate.toISOString();
-    endDate = endDate.replace(".000Z","Z");
-    
-    var getEvents = function() {
+
+var getEvents = function() {
+        // Set up Date Ranges and convert to ISO format fo
+        console.log(todayDate);
+        // endDate.setDate(todayDate.getDate()+5);
+        console.log(endDate)
+        // var numberOfMlSeconds = currentDateObj.getTime();
+        // var addMlSeconds = 60 * 60 * 1000;
+        // var newDateObj = new Date(numberOfMlSeconds + addMlSeconds);
+        endDate.setSeconds(0,0);
+        endDate = moment(endDate).toISOString(true)
+        // endDate = endDate.toISOString();
+        endDate = endDate.replace(".000-05:00","Z");
+        console.log(endDate);
         var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDate;
         console.log(todayDate);
         console.log(endDate);
@@ -158,7 +168,7 @@ function secondAPI() {
             buildDataStructure(data);
             displayEvents();
         })
-       .catch(function(error) {
+       .catch((error) => {
         console.log(error);
        alert("Error connecting to Ticketmaster.");
         });
@@ -172,10 +182,12 @@ function secondAPI() {
            todayDayNumber++;
            console.log(defineTargets);
         };
+        console.log(eventObj);
         for (let index = 0; index < eventObj.length; index++) {
             // Extract the date from the event date string from TM
             eventDate = new Date (eventObj[index].eventDate);
             targetSelector = eventDate.getDate();
+            console.log(targetSelector);
             // Find (and select) list corresponding to the date of the event
             var eventContainerEl = document.querySelector("[data-target='" + targetSelector + "']");
             // Create the elements for the event list items
