@@ -1,6 +1,7 @@
 var userLat = "";
 var userLong = "";
-var userRadius = 75;
+var userZip = "";
+var userRadius = "";
 var todayDate = new Date();
 var endDate = new Date();
 endDate.setDate(todayDate.getDate()+4);
@@ -10,17 +11,51 @@ var container2 = document.getElementById('place2');
 var container3 = document.getElementById('place3');
 var container4 = document.getElementById('place4');
 var container5 = document.getElementById('place5');
+var modal = document.getElementById("myModal");
+var submit = document.getElementById("submit");
+
+$(document).ready(function() {
+    modal.style.display = "block";
+});
+
+submit.onclick = function() {
+    userZip = document.getElementById("zipp").value;
+    userRadius = document.getElementById("radiuss").value;
+    if (!document.getElementById("zipp").value || !document.getElementById("radiuss").value || !isValidUSZip(userZip) || !isValidRad(userRadius)) {
+        
+    }
+    else {
+        takeInput();
+        displayTime();
+        firstAPI();
+        modal.style.display = "none";
+    }
+}
+
+function isValidUSZip(userZip) {
+    return /^\d{5}(-\d{4})?$/.test(userZip);
+}
+
+function isValidRad(userRadius) {
+    return userRadius.length === 2 && !isNaN(Number(userRadius))
+}
+
+var takeInput = function() {
+    localStorage.setItem(userZip, userRadius);
+}
+
 
 var displayTime = function() {
-    var time = moment().format('dddd </br> MM/DD');
+    var startDay = moment().isoWeekday();
+    var time = moment().day(startDay).format('dddd </br> MM/DD');
     $("#day1").html(time);
-    var time = moment().day(5).format('dddd </br> MM/DD');
+    var time = moment().day(startDay + 1).format('dddd </br> MM/DD');
     $("#day2").html(time);
-    var time = moment().day(6).format('dddd </br> MM/DD');
+    var time = moment().day(startDay + 2).format('dddd </br> MM/DD');
     $("#day3").html(time);
-    var time = moment().day(7).format('dddd </br> MM/DD');
+    var time = moment().day(startDay + 3).format('dddd </br> MM/DD');
     $("#day4").html(time);
-    var time = moment().day(8).format('dddd </br> MM/DD');
+    var time = moment().day(startDay + 4).format('dddd </br> MM/DD');
     $("#day5").html(time);
 };
 
@@ -47,23 +82,20 @@ var displayTime = function() {
 //    alert("Error connecting to Ticketmaster.");
 // });
 // };
-
-$(document).ready(function() {
-    displayTime();
-});
-
-fetch('https://api.openweathermap.org/data/2.5/weather?zip=27612&appid=cdf22472458b933575b8154ed94c685e&units=imperial&exclude=current,minutely,hourly')
-
-.then(function(response) {
-    return response.json();
-})
-.then(function(data) {
-    userLat = data.coord.lat;
-    userLong = data.coord.lon;
-    secondAPI();
-    getEvents();
-    }
-);
+function firstAPI() {
+    fetch('https://api.openweathermap.org/data/2.5/weather?zip=' + userZip + '&appid=cdf22472458b933575b8154ed94c685e&units=imperial&exclude=current,minutely,hourly')
+    
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        userLat = data.coord.lat;
+        userLong = data.coord.lon;
+        secondAPI();
+        getEvents();
+        }
+    );
+}
 
 function secondAPI() {
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + userLat + '&lon=' + userLong + '&exclude=current,minutely,hourly&units=imperial&appid=cdf22472458b933575b8154ed94c685e')
