@@ -15,9 +15,9 @@ Stores all user input in localStorage and shows suggestions of previously stored
 https://agpritts.github.io/project1-weather-event/
 
 ## Contributions
-Brian S. https://github.com/bdswartz
-Adam P. https://github.com/agpritts
-Byron S. https://github.com/byron4455
-Mike M. https://github.com/mcmathis91
+Brian S. https://github.com/bdswartz </br>
+Adam P. https://github.com/agpritts </br>
+Byron S. https://github.com/byron4455 </br>
+Mike M. https://github.com/mcmathis91 </br>
 
 ## Screenshots
