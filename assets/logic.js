@@ -152,13 +152,12 @@ function secondAPI() {
         var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDate;
         console.log(todayDate);
         console.log(endDate);
-       fetch(apiUrl).then(function(response) {
-            if (response.ok) { 
-                response.json().then(function(data) { 
-                    buildDataStructure(data);
-                    displayEvents();
-                })
-       })
+        fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            buildDataStructure(data);
+            displayEvents();
+        })
        .catch(function(error) {
         console.log(error);
        alert("Error connecting to Ticketmaster.");
