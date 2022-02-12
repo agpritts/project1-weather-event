@@ -2,9 +2,9 @@ var userLat = "";
 var userLong = "";
 var userRadius = 75;
 var todayDate = new Date();
-var offsetGmt = todayDate.timeZoneOffset * 60 * 1000
+// var offsetGmt = todayDate.timeZoneOffset * 60 * 1000
 var endDate = new Date();
-endDate.setDate(todayDate.getDate()+5);
+endDate.setDate(todayDate.getDate()+4);
 var eventObj = [{}];
 var container1 = document.getElementById('place1');
 var container2 = document.getElementById('place2');
@@ -148,20 +148,20 @@ function secondAPI() {
 
 var getEvents = function() {
         // Set up Date Ranges and convert to ISO format fo
-        console.log(todayDate);
+        // console.log(todayDate);
         // endDate.setDate(todayDate.getDate()+5);
-        console.log(endDate)
+        // console.log(endDate)
         // var numberOfMlSeconds = currentDateObj.getTime();
         // var addMlSeconds = 60 * 60 * 1000;
         // var newDateObj = new Date(numberOfMlSeconds + addMlSeconds);
         endDate.setSeconds(0,0);
-        endDate = moment(endDate).toISOString(true)
-        // endDate = endDate.toISOString();
-        endDate = endDate.replace(".000-05:00","Z");
-        console.log(endDate);
-        var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDate;
-        console.log(todayDate);
-        console.log(endDate);
+        // endDateISO = moment(endDate).toISOString(true)
+        var endDateISO = endDate.toISOString();
+        endDateISO = endDateISO.replace(".000Z","Z");
+        console.log(endDateISO);
+        var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&size=50&sort=date,asc&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDateISO;
+        // console.log(todayDate);
+        // console.log(endDate);
         fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
@@ -186,6 +186,7 @@ var getEvents = function() {
         for (let index = 0; index < eventObj.length; index++) {
             // Extract the date from the event date string from TM
             eventDate = new Date (eventObj[index].eventDate);
+            console.log(eventDate);
             targetSelector = eventDate.getDate();
             console.log(targetSelector);
             // Find (and select) list corresponding to the date of the event
@@ -201,7 +202,7 @@ var getEvents = function() {
             eventTimeEl.className = "event-time";
             // var formattedTime = new Date(eventObj[index].dateTime);
             formattedTime = moment(eventDate).format("h:mm a");
-            console.log(formattedTime);
+            // console.log(formattedTime);
             eventTimeEl.innerHTML = formattedTime;
             eventNameEl = document.createElement("p")
             eventNameEl.className = "event-name"
