@@ -35,7 +35,7 @@ li {
     padding: 2px 16px;
     color: white;
     text-align: center;
-    font-family: 'Varela Round', sans-serif
+    font-family: 'Varela Round', sans-serif;
 }
   
 /* Modal Body */
@@ -43,8 +43,10 @@ li {
     padding: 2px 16px;
 }
 
+/* Data Entry Boxes */
 #zipp, #radiuss {
     text-align: center;
+    /* Submit Button Needs Styling */
 }
   
 /* Modal Content */
@@ -65,3 +67,14 @@ li {
     from {top: -300px; opacity: 0}
     to {top: 0.5; opacity: 1}
 }
+
+/* Weather Section (ROWS NEED GAP SPACING) */
+.weatherdiv {
+    background-color: #34495e;
+    color: white;
+    font-family: 'Varela Round', sans-serif;
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+}
+
+/* Events Section (NEED ASSISTANCE WITH THIS SECTION BEFORE MOVING FURTHER) */
