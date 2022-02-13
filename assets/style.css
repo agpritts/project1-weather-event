@@ -1,28 +1,23 @@
-<<<<<<< HEAD
 * {
   padding: 0;
   margin: 0;
 }
-li {
-  list-style-type: none;
-}
-=======
 a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 .events {
-    display: flex;
-    width: 20%;
-    flex-direction: column;
-    list-style: none;
+  display: flex;
+  width: 20%;
+  flex-direction: column;
+  list-style: none;
 }
 li {
-    flex: 1;
-    border-radius: 10px;
-    margin: 10px auto;
-    border-radius: 10px;
-    background-color: lightgray;
-    padding: 5px 5px;
+  flex: 1;
+  list-style-type: none;
+  border-radius: 10px;
+  margin: 10px auto;
+  border-radius: 10px;
+  background-color: lightgray;
+  padding: 5px 5px;
 }
->>>>>>> b75402abbddcf196bfb4117792f134ec25360314
