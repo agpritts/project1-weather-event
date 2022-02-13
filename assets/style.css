@@ -1,7 +1,67 @@
-.weatherdiv #place1 {
-    display: flexbox;
-    justify-content: left;
-    align-items: center;
-    margin-top: 100px;
-    background-color: blue;
+a {
+    text-decoration: none;
+    color: black;
+}
+.events {
+    display: flex;
+    width: 20%;
+    flex-direction: column;
+    list-style: none;
+}
+li {
+    flex: 1;
+    border-radius: 10px;
+    margin: 10px auto;
+    border-radius: 10px;
+    background-color: lightgray;
+    padding: 5px 5px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 0.5; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #2c3e50;/* Fallback color */
+}
+  
+/* Modal Header */
+.modal-header {
+    padding: 2px 16px;
+    color: white;
+    text-align: center;
+    font-family: 'Varela Round', sans-serif
+}
+  
+/* Modal Body */
+.modal-body {
+    padding: 2px 16px;
+}
+
+#zipp, #radiuss {
+    text-align: center;
+}
+  
+/* Modal Content */
+.modal-content {
+    position: relative;
+    margin: 25% auto;
+    padding: 3%;
+    border-radius: 50px;
+    background: #34495e;
+    box-shadow: 5px 5px 10px whitesmoke, -5px -5px 10px whitesmoke;
+    width: 30%;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+  
+/* Add Animation */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0.5; opacity: 1}
 }
