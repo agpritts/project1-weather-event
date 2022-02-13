@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 * {
   padding: 0;
   margin: 0;
 }
+=======
+>>>>>>> 81542f919cf15f3efaef4f0b88e666f25bc48e36
 a {
   text-decoration: none;
   color: black;
@@ -21,3 +24,56 @@ li {
   background-color: lightgray;
   padding: 5px 5px;
 }
+<<<<<<< HEAD
+=======
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 0.5; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  
+/* Modal Header */
+.modal-header {
+    padding: 2px 16px;
+    color: black;
+}
+  
+/* Modal Body */
+.modal-body {
+    padding: 2px 16px;
+}
+  
+/* Modal Footer */
+.modal-footer {
+    padding: 2px 16px;
+    color: black;
+}
+  
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 25% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+  
+/* Add Animation */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0.5; opacity: 1}
+}
+>>>>>>> 81542f919cf15f3efaef4f0b88e666f25bc48e36
