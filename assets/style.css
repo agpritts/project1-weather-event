@@ -8,6 +8,7 @@ body {
 a {
   text-decoration: none;
   color: black;
+  padding: 10px;
 }
 .events {
   display: flex;
@@ -32,6 +33,7 @@ li {
   z-index: 0.5; /* Sit on top */
   left: 0;
   top: 0;
+  padding: 15px;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
@@ -80,7 +82,16 @@ li {
     opacity: 1;
   }
 }
+.event-time {
+  padding: 15px;
+}
 
+.event-venue {
+  padding: 10px;
+}
+.event-name {
+  padding: 15px;
+}
 #place1 {
   margin: 10px;
   background: rgba(209, 205, 205, 0.6);
@@ -109,5 +120,35 @@ li {
   margin: 10px;
   background: rgba(209, 205, 205, 0.6);
   border-radius: 25px;
+  padding: 25px;
+}
+#event-list-1 {
+  height: 200px;
+  width: 200px;
+  border: black 5px;
+}
+#event-list-2 {
+  height: 200px;
+  width: 200px;
+  border: black 5px;
+}
+#event-list-3 {
+  height: 200px;
+  width: 200px;
+  border: black 5px;
+}
+#event-list-4 {
+  height: 200px;
+  width: 200px;
+}
+#event-list-5 {
+  height: 200px;
+  width: 200px;
+}
+event-styles {
+  display: block;
+}
+
+p {
   padding: 25px;
 }
