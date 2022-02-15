@@ -2,20 +2,6 @@ a {
     text-decoration: none;
     color: black;
 }
-.events {
-    display: flex;
-    width: 20%;
-    flex-direction: column;
-    list-style: none;
-}
-li {
-    flex: 1;
-    border-radius: 10px;
-    margin: 10px auto;
-    border-radius: 10px;
-    background-color: lightgray;
-    padding: 5px 5px;
-}
 
 /* The Modal (background) */
 .modal {
@@ -46,8 +32,11 @@ li {
 /* Data Entry Boxes */
 #zipp, #radiuss {
     text-align: center;
-    /* Submit Button Needs Styling */
 }
+    /* Submit Button Needs Styling */
+button {
+    color: white;
+}    
   
 /* Modal Content */
 .modal-content {
@@ -56,7 +45,7 @@ li {
     padding: 3%;
     border-radius: 50px;
     background: #34495e;
-    box-shadow: 5px 5px 10px whitesmoke, -5px -5px 10px whitesmoke;
+    box-shadow: 5px 5px 10px red, -5px -5px 10px orange;
     width: 30%;
     animation-name: animatetop;
     animation-duration: 0.4s;
@@ -73,8 +62,16 @@ li {
     background-color: #34495e;
     color: white;
     font-family: 'Varela Round', sans-serif;
+    text-align: center;
     display: grid;
-    grid-template-columns: repeat(5, 20%);
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 5px;
 }
 
 /* Events Section (NEED ASSISTANCE WITH THIS SECTION BEFORE MOVING FURTHER) */
+ul {
+    background-color: #95a5a6;
+    font-family: 'Varela Round', sans-serif;
+    text-align: center;
+    display: grid;
+}
