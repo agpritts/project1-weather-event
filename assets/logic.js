@@ -5,6 +5,7 @@ var userRadius = "";
 var todayDate = new Date();
 var endDate = new Date();
 endDate.setDate(todayDate.getDate()+4);
+endDate.setHours(24);
 var eventObj = [{}];
 var container1 = document.getElementById('place1');
 var container2 = document.getElementById('place2');
@@ -16,9 +17,12 @@ var submit = document.getElementById("submit");
 
 $(document).ready(function() {
     modal.style.display = "block";
+    document.getElementById("zipp").value = localStorage.getItem("userZip");
+    document.getElementById("radiuss").value = localStorage.getItem("userRadius");
 });
 
 submit.onclick = function() {
+    // modal submit functionality
     userZip = document.getElementById("zipp").value;
     userRadius = document.getElementById("radiuss").value;
     if (!document.getElementById("zipp").value || !document.getElementById("radiuss").value || !isValidUSZip(userZip) || !isValidRad(userRadius)) {
@@ -33,56 +37,34 @@ submit.onclick = function() {
 }
 
 function isValidUSZip(userZip) {
+    // verify inputted zip code as a valid zip code
     return /^\d{5}(-\d{4})?$/.test(userZip);
 }
 
 function isValidRad(userRadius) {
+    // verify inputted radius as a valid radius value
     return userRadius.length === 2 && !isNaN(Number(userRadius))
 }
 
 var takeInput = function() {
-    localStorage.setItem(userZip, userRadius);
+    // put userZip and userRadius in localStorage
+    localStorage.setItem("userZip", userZip);
+    localStorage.setItem("userRadius", userRadius);
 }
 
 
 var displayTime = function() {
-    var startDay = moment().isoWeekday();
-    var time = moment().day(startDay).format('dddd </br> MM/DD');
-    $("#day1").html(time);
-    var time = moment().day(startDay + 1).format('dddd </br> MM/DD');
-    $("#day2").html(time);
-    var time = moment().day(startDay + 2).format('dddd </br> MM/DD');
-    $("#day3").html(time);
-    var time = moment().day(startDay + 3).format('dddd </br> MM/DD');
-    $("#day4").html(time);
-    var time = moment().day(startDay + 4).format('dddd </br> MM/DD');
-    $("#day5").html(time);
+    // loop through the 5 upcoming days and append to page
+    for (let i = 0; i < 5; i++) {
+        var startDay = moment().isoWeekday();
+        var time = moment().day(startDay + i).format('dddd </br> MM/DD');
+        $("#day" + (i + 1)).html(time);
+    }
+    
 };
 
-// endDate.setDate(todayDate.getDate()+5);
-// endDate.setSeconds(0,0);
-// endDate = endDate.toISOString();
-// endDate = endDate.replace(".000Z","Z");
-// var apiUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=UpMNgv350gA3fGQjOpjHrZqALQWbo98H&latlong=" + userLat + "," + userLong + "&radius=" + userRadius + "&endDateTime=" + endDate;
-// var getEvents = function() {
-//     console.log(todayDate);
-//     console.log(endDate);
-//    fetch(apiUrl).then(function(response) {
-//     //    console.log(response);
-//         if (response.ok) {
-//             response.json().then(function(data) { 
-//                 console.log(data);
-//                 buildDataStructure(data);
-//                 displayEvents();
-//                 // console.log(eventObj);
-//         }
-//    })
-//    .catch(function(error) {
-//     console.log(error);
-//    alert("Error connecting to Ticketmaster.");
-// });
-// };
 function firstAPI() {
+    // convert zip to lat/long for the remaining API calls to use
     fetch('https://api.openweathermap.org/data/2.5/weather?zip=' + userZip + '&appid=cdf22472458b933575b8154ed94c685e&units=imperial&exclude=current,minutely,hourly')
     
     .then(function(response) {
@@ -98,76 +80,29 @@ function firstAPI() {
 }
 
 function secondAPI() {
+    // weather call
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + userLat + '&lon=' + userLong + '&exclude=current,minutely,hourly&units=imperial&appid=cdf22472458b933575b8154ed94c685e')
     
     .then(function(response) {
         return response.json();
     })
     .then(function(data) {
-        var tempD = document.createElement('p');
-        tempD.textContent = 'Day: ' + data.daily[0].temp.day + '°F';
-        container1.appendChild(tempD);
-        var tempN = document.createElement('p');
-        tempN.textContent = 'Night: ' + data.daily[0].temp.eve + '°F';
-        container1.appendChild(tempN);
-        var foreC = document.createElement('p');
-        foreC.textContent = 'Forecast: ' + data.daily[0].weather[0].main;
-        container1.appendChild(foreC);
-        var iconn = document.createElement('img');
-        iconn.src = 'http://openweathermap.org/img/wn/' + data.daily[0].weather[0].icon + '@2x.png';
-        container1.appendChild(iconn);
-    
-        var tempD = document.createElement('p');
-        tempD.textContent = 'Day: ' + data.daily[1].temp.day + '°F';
-        container2.appendChild(tempD);
-        var tempN = document.createElement('p');
-        tempN.textContent = 'Night: ' + data.daily[1].temp.eve + '°F';
-        container2.appendChild(tempN);
-        var foreC = document.createElement('p');
-        foreC.textContent = 'Forecast: ' + data.daily[1].weather[0].main;
-        container2.appendChild(foreC);
-        var iconn = document.createElement('img');
-        iconn.src = 'http://openweathermap.org/img/wn/' + data.daily[1].weather[0].icon + '@2x.png';
-        container2.appendChild(iconn);
-    
-        var tempD = document.createElement('p');
-        tempD.textContent = 'Day: ' + data.daily[2].temp.day + '°F';
-        container3.appendChild(tempD);
-        var tempN = document.createElement('p');
-        tempN.textContent = 'Night: ' + data.daily[2].temp.eve + '°F';
-        container3.appendChild(tempN);
-        var foreC = document.createElement('p');
-        foreC.textContent = 'Forecast: ' + data.daily[2].weather[0].main;
-        container3.appendChild(foreC);
-        var iconn = document.createElement('img');
-        iconn.src = 'http://openweathermap.org/img/wn/' + data.daily[2].weather[0].icon + '@2x.png';
-        container3.appendChild(iconn);
-    
-        var tempD = document.createElement('p');
-        tempD.textContent = 'Day: ' + data.daily[3].temp.day + '°F';
-        container4.appendChild(tempD);
-        var tempN = document.createElement('p');
-        tempN.textContent = 'Night: ' + data.daily[3].temp.eve + '°F';
-        container4.appendChild(tempN);
-        var foreC = document.createElement('p');
-        foreC.textContent = 'Forecast: ' + data.daily[3].weather[0].main;
-        container4.appendChild(foreC);
-        var iconn = document.createElement('img');
-        iconn.src = 'http://openweathermap.org/img/wn/' + data.daily[3].weather[0].icon + '@2x.png';
-        container4.appendChild(iconn);
-    
-        var tempD = document.createElement('p');
-        tempD.textContent = 'Day: ' + data.daily[4].temp.day + '°F';
-        container5.appendChild(tempD);
-        var tempN = document.createElement('p');
-        tempN.textContent = 'Night: ' + data.daily[4].temp.eve + '°F';
-        container5.appendChild(tempN);
-        var foreC = document.createElement('p');
-        foreC.textContent = 'Forecast: ' + data.daily[4].weather[0].main;
-        container5.appendChild(foreC);
-        var iconn = document.createElement('img');
-        iconn.src = 'http://openweathermap.org/img/wn/' + data.daily[4].weather[0].icon + '@2x.png';
-        container5.appendChild(iconn);
+        // loop through weather data for the 5 upcoming days and append to page
+        for (let i = 0; i < 5; i++) {
+            var containr = document.getElementById('place' + (i + 1))
+            var tempD = document.createElement('p');
+            tempD.textContent = 'Day: ' + data.daily[i].temp.day + '°F';
+            containr.appendChild(tempD);
+            var tempN = document.createElement('p');
+            tempN.textContent = 'Night: ' + data.daily[i].temp.eve + '°F';
+            containr.appendChild(tempN);
+            var foreC = document.createElement('p');
+            foreC.textContent = 'Forecast: ' + data.daily[i].weather[0].main;
+            containr.appendChild(foreC);
+            var iconn = document.createElement('img');
+            iconn.src = 'http://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '@2x.png';
+            containr.appendChild(iconn);
+        }
     })
 };
 
