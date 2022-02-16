@@ -11,23 +11,6 @@ Modal checks for valid user input and plugs user input into API calls to display
 Stores all user input in localStorage and shows suggestions of previously stored user inputs for returning users </br>
 </br>
 
-
-## Technologies
-
-> <b>Development Tools:</b>
-  * JavaScript
-  * CSS
-  * HTML
-  * moment.js
-  * jQuery
-
-## APIs
-
-* <b>Open Weather</b> - https://openweathermap.org/
-* <b>Ticketmaster</b> - https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/
-
-
-
 ## GitHub Pages Link
 https://agpritts.github.io/project1-weather-event/
 

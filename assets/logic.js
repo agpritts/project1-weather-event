@@ -13,8 +13,6 @@ var container4 = document.getElementById('place4');
 var container5 = document.getElementById('place5');
 var modal = document.getElementById("myModal");
 var submit = document.getElementById("submit");
-// get the event list for event listener
-var eventListEl = document.querySelector(".list-container");
 
 $(document).ready(function() {
     modal.style.display = "block";
@@ -210,10 +208,6 @@ var getEvents = function() {
             var eventContainerEl = document.querySelector("[data-target='" + targetSelector + "']");
             // Create the elements for the event list items
             eventItemEl = document.createElement("li");
-
-            // add the array index to the list elements for tracking purposes
-            eventItemEl.dataset.index = index;
-
             // Anchor tag to link to the TM site for ticket purchase
             eventLinkEl = document.createElement("a");
             eventLinkEl.setAttribute("href", eventObj[index].eventUrl);
@@ -248,18 +242,7 @@ var getEvents = function() {
             startTime:  data._embedded.events[index].dates.start.localTime,
             venue:  data._embedded.events[index]._embedded.venues[0].name,
             venueId: data._embedded.events[index]._embedded.venues[0].id,
-            venueAddress: data._embedded.events[index]._embedded.venues[0].address.line1,
-            venueCity: data._embedded.events[index]._embedded.venues[0].city.name,
-            venueState: data._embedded.events[index]._embedded.venues[0].state.stateCode,
-            venueZip: data._embedded.events[index]._embedded.venues[0].postalCode,
             eventUrl: data._embedded.events[index].url
             };
         }
     };
-    eventListEl.addEventListener("click", function() {
-        var eventChoice = parseInt(event.target.getAttribute("data-index"))
-        if (eventChoice) {
-                
-        }
-
-    })
