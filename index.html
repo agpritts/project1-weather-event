@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style.css" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">
+    <title>Project</title>
+</head>
+<body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Please enter your zip code and how far out you would be willing to travel:</h4>
+            </div>
+            <div class="modal-body">
+                <textarea id="zipp" placeholder="Zip"></textarea>
+                <textarea id="radiuss" placeholder="Radius (in miles)"></textarea>
+                <button id="submit">Submit</button>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+
+    <div class="weatherdiv flex-container align-spaced">
+        <div id="place1">
+            <h2 id="day1"></h2>
+        </div>
+        <div id="place2">
+            <h2 id="day2"></h2>
+        </div>
+        <div id="place3">
+            <h2 id="day3"></h2>
+        </div>
+        <div id="place4">
+            <h2 id="day4"></h2>
+        </div>
+        <div id="place5">
+            <h2 id="day5"></h2>
+        </div>
+    </div>
+    <div class="flex-container column">
+        <ul id="event-list-1">
+                <!-- <li class="cell small-3">Lorem ipsum dolor sit amet.</li>
+                <li class="cell small-3">Lorem ipsum dolor sit amet.</li> -->
+        </ul>
+        <ul id="event-list-2">
+            <!-- <li class="cell small-3">Lorem ipsum dolor sit amet.</li>
+            <li class="cell small-3">Lorem ipsum dolor sit amet.</li> -->
+        </ul>
+        <ul id="event-list-3">
+            <!-- <li class="cell small-3">Lorem ipsum dolor sit amet.</li>
+            <li class="cell small-3">Lorem ipsum dolor sit amet.</li> -->
+
+        </ul>
+        <ul id="event-list-4">
+            <!-- <li class="cell small-3">Lorem ipsum dolor sit amet.</li>
+            <li class="cell small-3">Lorem ipsum dolor sit amet.</li> -->
+        </ul>
+        <ul id="event-list-5">
+            <!-- <li class="cell small-3">Lorem ipsum dolor sit amet.</li>
+            <li class="cell small-3">Lorem ipsum dolor sit amet.</li> -->
+        </ul>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="./assets/logic.js"></script>
+
+</html>
