@@ -5,10 +5,17 @@ body {
   background-size: cover !important;
   /* background by SVGBackgrounds.com */
 }
+
+header {
+  text-align: center;
+}
+h1 {
+  text-align: center;
+}
 a {
   text-decoration: none;
   color: black;
-  padding: 10px;
+  /* padding: 10px; */
 }
 .events {
   display: flex;
@@ -16,14 +23,23 @@ a {
   flex-direction: column;
   list-style: none;
 }
+.weatherdiv {
+  max-height: 900px;
+}
+
+ul {
+  overflow: auto;
+}
 li {
   flex: 1;
   list-style-type: none;
   border-radius: 10px;
   margin: 10px auto;
   border-radius: 10px;
-  background-color: lightgray;
+  background-color: rgb(211, 211, 211, 0.85);
   padding: 5px 5px;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* The Modal (background) */
@@ -39,6 +55,7 @@ li {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Modal Header */
@@ -46,10 +63,13 @@ li {
   padding: 2px 16px;
   color: black;
 }
-
+button {
+  align-items: center;
+}
 /* Modal Body */
 .modal-body {
   padding: 2px 16px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Modal Footer */
@@ -93,56 +113,68 @@ li {
   padding: 15px;
 }
 #place1 {
+  height: 500px;
+  width: 300px;
   margin: 10px;
   background: rgba(209, 205, 205, 0.6);
   border-radius: 25px;
-  padding: 25px;
+  padding: 65px;
+  text-align: center;
 }
 #place2 {
+  height: 500px;
+  width: 300px;
   margin: 10px;
   background: rgba(209, 205, 205, 0.6);
   border-radius: 25px;
-  padding: 25px;
+  padding: 50px;
+  text-align: center;
 }
 #place3 {
+  height: 500px;
+  width: 300px;
   margin: 10px;
   background: rgba(209, 205, 205, 0.6);
   border-radius: 25px;
-  padding: 25px;
+  padding: 65px;
+  text-align: center;
 }
 #place4 {
+  height: 500px;
+  width: 300px;
   margin: 10px;
   background: rgba(209, 205, 205, 0.6);
   border-radius: 25px;
-  padding: 25px;
+  padding: 65px;
+  text-align: center;
 }
 #place5 {
+  height: 500px;
+  width: 300px;
   margin: 10px;
   background: rgba(209, 205, 205, 0.6);
   border-radius: 25px;
-  padding: 25px;
+  padding: 65px;
+  text-align: center;
 }
 #event-list-1 {
-  height: 200px;
+  height: 600px;
   width: 200px;
-  border: black 5px;
 }
 #event-list-2 {
-  height: 200px;
+  height: 600px;
   width: 200px;
-  border: black 5px;
 }
 #event-list-3 {
-  height: 200px;
+  height: 600px;
   width: 200px;
-  border: black 5px;
 }
 #event-list-4 {
-  height: 200px;
+  height: 600px;
   width: 200px;
 }
 #event-list-5 {
-  height: 200px;
+  height: 600px;
   width: 200px;
 }
 event-styles {
@@ -151,4 +183,10 @@ event-styles {
 
 p {
   padding: 25px;
+}
+.event-div ::-webkit-scrollbar {
+  display: none;
+}
+.weatherdiv {
+  font-family: Arial, Helvetica, sans-serif;
 }
