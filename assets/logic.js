@@ -5,6 +5,7 @@ var userRadius = "";
 var todayDate = new Date();
 var endDate = new Date();
 endDate.setDate(todayDate.getDate()+4);
+endDate.setHours(24);
 var eventObj = [{}];
 var container1 = document.getElementById('place1');
 var container2 = document.getElementById('place2');
