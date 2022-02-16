@@ -164,6 +164,7 @@ var getEvents = function() {
             eventItemEl.appendChild(eventVenueEl);
             eventLinkEl.appendChild(eventItemEl);
             // Attach them to the proper unordered list
+            eventLinkEl.className = "event-styles"
             eventContainerEl.appendChild(eventLinkEl);
         };
     
