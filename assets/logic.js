@@ -55,6 +55,8 @@ var takeInput = function() {
 
 var displayTime = function() {
     // loop through the 5 upcoming days and append to page
+    var mainTitle = document.getElementById("main-title");
+    mainTitle.textContent = "Daily Entertainment Outlook";
     for (let i = 0; i < 5; i++) {
         var startDay = moment().isoWeekday();
         var time = moment().day(startDay + i).format('dddd </br> MM/DD');
@@ -89,7 +91,8 @@ function secondAPI() {
     .then(function(data) {
         // loop through weather data for the 5 upcoming days and append to page
         for (let i = 0; i < 5; i++) {
-            var containr = document.getElementById('place' + (i + 1))
+            var containr = document.getElementById('place' + (i + 1));
+            containr.setAttribute("style", "border: 2px solid black;")
             var tempD = document.createElement('p');
             tempD.textContent = 'Day: ' + data.daily[i].temp.day + '°F';
             containr.appendChild(tempD);
