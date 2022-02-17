@@ -38,7 +38,7 @@ submit.onclick = function() {
 
 function isValidUSZip(userZip) {
     // verify inputted zip code as a valid zip code
-    return /^\d{5}(-\d{4})?$/.test(userZip);
+    return userZip.length === 5 && /^\d{5}(-\d{4})?$/.test(userZip);
 }
 
 function isValidRad(userRadius) {
