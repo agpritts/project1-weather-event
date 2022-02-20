@@ -45,14 +45,16 @@ a {
   width: 95%;
   flex-direction: column;
   list-style: none;
+  overflow: auto;
 }
+
 li {
   flex: 1;
   list-style-type: none;
   border: 2px solid black;
   border-radius: 10px;
   /* margin: 10px auto; */
-  background-color: rgba(255,255,255,0.2);  
+  background-color: rgba(255,255,255,0.4);  
   padding: 10px 10px;
   margin-bottom: 10px !important;
 }
@@ -65,6 +67,7 @@ li {
     width: 10%;
     border-radius: 25px;
     color: black;
+    max-height: 900px;
     /* background-color: #485460; */
 }
 
@@ -83,7 +86,7 @@ li {
   margin-bottom: 20px;  
   margin-right: auto;
   margin-left: auto;
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255,255,255,0.4);
 }
 .weather-card h2, .weather-card p, .weather-card img{
   padding: 0 20px;
@@ -126,9 +129,6 @@ li {
 .modal-font {
   font-family: 'Varela Round', sans-serif;
 }
-.event-div ::-webkit-scrollbar {
-  display: none;
-}
 .modal-body textarea {
   border-radius: 5px;
   width: 75%; 
@@ -136,4 +136,18 @@ li {
 } 
 .weatherdiv {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@media screen and (max-width: 650px) {
+  .master-container {
+    flex-direction: column;
+  }
+  .day-card {
+    flex: 1;
+    width: 100%;
+    max-height: fit-content;
+  }
+  .modal-content {
+    width: 75%;
+  }
 }
