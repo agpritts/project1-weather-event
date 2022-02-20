@@ -21,3 +21,7 @@ Byron S. https://github.com/byron4455 </br>
 Mike M. https://github.com/mcmathis91 </br>
 
 ## Screenshots
+
+<img width="963" alt="Screen Shot 2022-02-20 at 10 04 59 AM" src="https://user-images.githubusercontent.com/96213926/154857190-ccdbf88a-d4c3-452e-b3cc-baae7b6b2af4.png">
+
+<img width="962" alt="Screen Shot 2022-02-20 at 10 05 16 AM" src="https://user-images.githubusercontent.com/96213926/154857205-93d4dc71-ee89-44fe-bac7-d5f26a17a215.png">
